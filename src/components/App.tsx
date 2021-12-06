@@ -1,12 +1,10 @@
 import React from 'react';
 import '../css/App.css';
 
-function App() {
+export const App = () => {
     return (
-        <div className="App">
+        <div className="App bg-gray-600">
             <span> Hello ToDo App! </span>
         </div>
     );
 }
-
-export default App;
