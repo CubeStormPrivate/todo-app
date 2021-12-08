@@ -3,7 +3,7 @@ import * as React from 'react';
 interface ButtonProps {
     text: String,
     styles: string | null
-    handler: () => void,
+    handler?: (param?: any) => void,
 }
 
 export const Button: React.FC<ButtonProps> = ({ text, styles, handler }) => {
