@@ -1,5 +1,5 @@
-import { AnyAction } from 'redux';
 import { createSlice } from '@reduxjs/toolkit'
+
 
 interface TaskType {
     id: number,
@@ -8,35 +8,45 @@ interface TaskType {
     isImportant: boolean
 }
 
+interface StateType {
+    tasks: TaskType[]
+}
+
 const taskSlice = createSlice({
-    name: 'task',
-    initialState: [],
+    name: 'tasks',
+    initialState: {
+        tasks: [
+            { id: 0, name: 'Zrób śniadanie', date: '2021-12-09', isImportant: true }
+        ]
+    },
     reducers: {
-        create: (state: TaskType[], action) => {
-            state.push(action.payload);
+        create: (state: StateType, action) => {
+            state.tasks = [...state.tasks, action.payload];
         },
-        remove: (state: TaskType[], action: AnyAction) => {
-            state.filter(task => task.id !== action.payload.id)
+        remove: (state: StateType, action) => {
+            state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
+        },
+        updateIsImportant: (state: StateType, action) => {
+            state.tasks = state.tasks.filter(task => {
+                if (task.id === action.payload.id) {
+                    task.isImportant = !task.isImportant
+                }
+
+                return task
+            })
+        },
+        update: (state: StateType, action) => {
+            state.tasks = state.tasks.filter(task => {
+                if (task.id === action.payload.id) {
+                    task.name = action.payload.name
+                    task.date = action.payload.date
+                }
+
+                return task
+            })
         }
     }
 });
 
-export const { create, remove } = taskSlice.actions;
+export const { create, remove, updateIsImportant, update } = taskSlice.actions;
 export default taskSlice.reducer;
-
-
-
-// import { TYPES } from '../actions/task/types';
-
-// export const taskReducer = (state: TaskType[] = [], action: AnyAction) => {
-//     switch (action.type) {
-//         case TYPES.STORE:
-//             return [state, ...action.payload];
-
-//         case TYPES.DELETE:
-//             return state.filter((task: TaskType) => task.id !== action.payload.id)
-
-//         default:
-//             console.error('Ooops! Something went wrong!');
-//     }
-// }

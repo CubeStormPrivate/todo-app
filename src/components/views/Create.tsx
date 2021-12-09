@@ -6,27 +6,25 @@ import { create } from '../../reducers/task';
 import { store } from '../../store/store';
 
 import { Button } from '../inc/Button';
+import { Checkbox } from '../inc/Checkbox';
 import { Input } from '../inc/Input';
 
 
-interface CreateProps {
-
-}
-
-export const Create: React.FC<CreateProps> = () => {
+export const Create: React.FC = () => {
     const [name, setName] = useState('');
     const [date, setDate] = useState('');
-    const [isImportant, setIsImportant] = useState('');
+    const [isImportant, setIsImportant] = useState(false);
 
     const navigation = useNavigate();
 
     const handleSubmit = (event: React.FormEvent) => {
         event.preventDefault();
 
-        store.dispatch(create({
-            name, date, isImportant
-        }));
-        console.log('Zadanie zostało utworzone');
+        const id = Date.now().toString(36) + Math.random().toString(36).substr(2);;
+
+        store.dispatch(create({ id, name, date, isImportant }));
+
+        navigation('/');
     }
 
 
@@ -57,11 +55,10 @@ export const Create: React.FC<CreateProps> = () => {
                         setValue={setDate}
                     />
 
-                    <Input
-                        type="checkbox"
+                    <Checkbox
                         name="Ważne"
                         styles={''}
-                        value={isImportant}
+                        value={String(isImportant)}
                         setValue={setIsImportant}
                     />
 

@@ -8,12 +8,6 @@ import { Button } from '../inc/Button';
 import { SingleTask } from '../SingleTask';
 
 
-// const TASKS = [
-//     { id: 0, name: 'Zrób śniadanie', date: 'Wtorek', isImportant: true },
-//     { id: 1, name: 'Zrób obiad', date: 'Środa', isImportant: false },
-//     { id: 2, name: 'Zrób kolacje', date: 'Czwartek', isImportant: false },
-//     { id: 3, name: 'Zrób podwieczorek', date: 'Piątek', isImportant: true },
-// ];
 interface TaskType {
     id: number,
     name: string,
@@ -21,16 +15,14 @@ interface TaskType {
     isImportant: boolean
 }
 
-interface TasksProps {
-
-}
+interface TasksProps { }
 
 export const Tasks: React.FC<TasksProps> = () => {
     const tasks = useSelector((state: RootState) => state.tasks);
 
     const navigation = useNavigate();
 
-    const TasksComponent = tasks.map((task: TaskType, i) => (
+    const TasksComponent = tasks.tasks.map((task: TaskType, i) => (
         <SingleTask key={i} {...task} />
     ));
 
