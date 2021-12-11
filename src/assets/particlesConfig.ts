@@ -10,7 +10,7 @@ export const particlesConfig: RecursivePartial<IOptions> = {
   interactivity: {
     events: {
       onClick: {
-        enable: true,
+        enable: false,
         mode: "repulse",
       },
       onHover: {
@@ -62,7 +62,7 @@ export const particlesConfig: RecursivePartial<IOptions> = {
         enable: true,
         value_area: 800,
       },
-      value: 10,
+      value: 5,
     },
     opacity: {
       value: 0.2,

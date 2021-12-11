@@ -5,10 +5,12 @@ import { useNavigate } from 'react-router';
 
 import { create } from '../../reducers/task';
 import { store } from '../../store/store';
+import { Header } from '../Header';
 
 import { Button } from '../inc/Button';
 import { Checkbox } from '../inc/Checkbox';
 import { Input } from '../inc/Input';
+import { Navigation } from '../Navigation';
 
 
 export const Create: React.FC = () => {
@@ -29,12 +31,10 @@ export const Create: React.FC = () => {
 
 
     return (
-        <div className="w-full max-w-xl border-2 border-gray-200">
-            <header className="w-full flex justify-between p-8">
-                <h1 className="text-3xl text-gray-200 font-bold">Dodaj zadanie</h1>
-            </header>
+        <div className="w-full h-full flex flex-col justify-start">
+            <Header title="Dodaj zadanie" />
 
-            <main className="w-full flex flex-col gap-5 px-8">
+            <main className="w-full px-8 flex-1">
                 <form
                     className="flex flex-col gap-8"
                     onSubmit={event => handleSubmit(event)}
@@ -61,21 +61,21 @@ export const Create: React.FC = () => {
                         value={String(isImportant)}
                         setValue={setIsImportant}
                     />
-
-                    <div className="w-full flex justify-end gap-8">
-                        <Button
-                            text="Dodaj"
-                            styles="bg-green-500 text-gray-100 text-xs"
-                        />
-
-                        <Button
-                            text="Wstecz"
-                            styles="bg-yellow-500 text-black text-xs text-red"
-                            handler={() => navigation('/')}
-                        />
-                    </div>
                 </form>
             </main>
+
+            <Navigation>
+                <Button
+                    title="Stwórz"
+                    styles="bg-green-500 text-gray-200"
+                />
+
+                <Button
+                    title="Wstecz"
+                    styles="bg-yellow-500 text-black text-xs text-red"
+                    handler={() => navigation('/')}
+                />
+            </Navigation>
         </div>
     );
 }

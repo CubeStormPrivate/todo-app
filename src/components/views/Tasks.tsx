@@ -4,8 +4,10 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { RootState } from '../../store/store';
+import { Header } from '../Header';
 
 import { Button } from '../inc/Button';
+import { Navigation } from '../Navigation';
 import { SingleTask } from '../SingleTask';
 
 
@@ -27,20 +29,20 @@ export const Tasks: React.FC = () => {
 
 
     return (
-        <div className="w-full">
-            <header className="w-full flex justify-between p-8">
-                <h1 className="text-3xl text-gray-200 font-bold">Todo Lista</h1>
+        <div className="w-full h-full flex flex-col">
+            <Header title="Lista zadań" />
 
+            <main className="w-full px-8 flex-1">
+                {TasksComponent}
+            </main>
+
+            <Navigation>
                 <Button
-                    text="Dodaj Zadanie"
+                    title="Dodaj Zadanie"
                     styles="bg-green-500 text-gray-200"
                     handler={() => navigation('/dodaj')}
                 />
-            </header>
-
-            <main className="w-full flex flex-col gap-5 px-8">
-                {TasksComponent}
-            </main>
+            </Navigation>
         </div>
     );
 }
