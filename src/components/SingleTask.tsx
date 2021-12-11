@@ -28,13 +28,8 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
         store.dispatch(updateIsImportant({ id }));
     }
 
-    const handleChangeName = (name: string) => {
-        setNameEdited(name);
-    }
-
-    const handleChangeDate = (date: string) => {
-        setDateEdited(date);
-    }
+    const handleChangeName = (name: string) => setNameEdited(name);
+    const handleChangeDate = (date: string) => setDateEdited(date);
 
     const handleUpdate = () => {
         setIsEditing(false);

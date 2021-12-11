@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 import { create } from '../../reducers/task';
@@ -18,6 +18,8 @@ export const Create: React.FC = () => {
     const [date, setDate] = useState('');
     const [isImportant, setIsImportant] = useState(false);
 
+    const inputNameRef = useRef<HTMLInputElement>(null);
+
     const navigation = useNavigate();
 
     const handleSubmit = (event: React.FormEvent) => {
@@ -28,6 +30,10 @@ export const Create: React.FC = () => {
         store.dispatch(create({ id, name, date, isImportant }));
         navigation('/');
     }
+
+    useEffect(() => {
+        inputNameRef.current && inputNameRef.current.focus();
+    }, []);
 
 
     return (
@@ -43,6 +49,7 @@ export const Create: React.FC = () => {
                         type="text"
                         name="Nazwa zadania"
                         styles={''}
+                        refProp={inputNameRef}
                         value={name}
                         setValue={setName}
                     />
@@ -56,7 +63,7 @@ export const Create: React.FC = () => {
                     />
 
                     <Checkbox
-                        name="Ważne"
+                        name="Priorytet"
                         styles={''}
                         value={String(isImportant)}
                         setValue={setIsImportant}
