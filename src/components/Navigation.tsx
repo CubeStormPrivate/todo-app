@@ -7,7 +7,7 @@ interface NavigationProps {
 
 export const Navigation: React.FC<NavigationProps> = ({ children }) => {
     return (
-        <nav className="w-full flex flex-wrap justify-end gap-4 p-4">
+        <nav className="w-full flex flex-wrap justify-end gap-1 p-4">
             {children}
         </nav>
     );

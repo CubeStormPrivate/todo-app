@@ -32,14 +32,14 @@ export const Tasks: React.FC = () => {
         <div className="w-full h-full flex flex-col">
             <Header title="Lista zadań" />
 
-            <main className="w-full px-8 flex flex-col flex-1 gap-2">
+            <main className="w-full px-8 flex flex-col flex-1 gap-2 overflow-y-scroll">
                 {TasksComponent}
             </main>
 
             <Navigation>
                 <Button
                     title="Dodaj Zadanie"
-                    styles="bg-green-500 text-gray-200"
+                    styles="bg-green-500 text-gray-200 text-sm"
                     handler={() => navigation('/dodaj')}
                 />
             </Navigation>

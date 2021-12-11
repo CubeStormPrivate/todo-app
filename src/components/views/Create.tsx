@@ -73,15 +73,16 @@ export const Create: React.FC = () => {
 
             <Navigation>
                 <Button
-                    title="Stwórz"
-                    styles="bg-green-500 text-gray-200"
-                    handler={event => handleSubmit(event)}
+                    title="Wstecz"
+                    bgColor="yellow"
+                    handler={() => navigation('/')}
                 />
 
                 <Button
-                    title="Wstecz"
-                    styles="bg-yellow-500 text-black text-xs text-red"
-                    handler={() => navigation('/')}
+                    title="Stwórz"
+                    bgColor="green"
+                    styles="bg-green-500 text-gray-200"
+                    handler={event => handleSubmit(event)}
                 />
             </Navigation>
         </div>
