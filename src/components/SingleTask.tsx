@@ -47,11 +47,10 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
     }
 
 
-
     return (
         <div
             onClick={handleUpdateIsImportant}
-            className={`w-full flex justify-between items-center gap-8 bg-gray-500 cursor-pointer p-4 ${isImportant && 'border-l-8 border-red-400'}`}
+            className={`w-full flex justify-between items-center gap-8 cursor-pointer p-3 ${isImportant && 'border-l-8 border-red-400'} glass-2`}
         >
             {isEditing ? (
                 <div className="flex flex-col gap-2">
@@ -69,12 +68,12 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
                 </div>
             ) : (
                 <div className="flex flex-col">
-                    <span className="text-gray-200 font-bold" > {name} </span>
-                    <span className="text-gray-200 text-xs" > {dateEdited} </span>
+                    <span className="text-gray-200 text-lg"> {name} </span>
+                    <span className="text-gray-200 font-bold text-xs"> {dateEdited} </span>
                 </div>
             )}
 
-            <div className="flex justify-center items-center gap-1 p-3">
+            <div className="flex justify-center items-center gap-1">
                 {isEditing ? (
                     <IconButton
                         icon={faCheck}

@@ -32,7 +32,7 @@ export const Tasks: React.FC = () => {
         <div className="w-full h-full flex flex-col">
             <Header title="Lista zadań" />
 
-            <main className="w-full px-8 flex-1">
+            <main className="w-full px-8 flex flex-col flex-1 gap-2">
                 {TasksComponent}
             </main>
 

@@ -10,7 +10,7 @@ import { Create as CreateView } from './views/Create';
 
 export const App: React.FC = () => {
     return (
-        <div className="min-h-screen flex justify-center bg-background bg-cover bg-center p-12">
+        <div className="min-h-screen flex justify-center bg-background p-12">
             <div className="w-full max-w-xl relative z-10 glass">
                 <Routes>
                     <Route path="/" element={<TasksView />} />

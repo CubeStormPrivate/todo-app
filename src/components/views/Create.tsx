@@ -68,6 +68,7 @@ export const Create: React.FC = () => {
                 <Button
                     title="Stwórz"
                     styles="bg-green-500 text-gray-200"
+                    handler={event => handleSubmit(event)}
                 />
 
                 <Button
