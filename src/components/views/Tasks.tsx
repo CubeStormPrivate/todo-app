@@ -39,7 +39,6 @@ export const Tasks: React.FC = () => {
             <Navigation>
                 <Button
                     title="Dodaj Zadanie"
-                    styles="bg-green-500 text-gray-200 text-sm"
                     handler={() => navigation('/dodaj')}
                 />
             </Navigation>

@@ -6,6 +6,7 @@ import { store } from '../store/store';
 
 import { IconButton } from './inc/IconButton';
 import { faTimes, faPencilAlt, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { Input } from './inc/Input';
 
 
 interface SingleTaskProps {
@@ -20,16 +21,11 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
     const [nameEdited, setNameEdited] = useState(name);
     const [dateEdited, setDateEdited] = useState(date);
 
-    const handleRemoveTask = () => {
-        store.dispatch(remove({ id }));
-    }
-
-    const handleUpdateIsImportant = () => {
-        store.dispatch(updateIsImportant({ id }));
-    }
-
     const handleChangeName = (name: string) => setNameEdited(name);
     const handleChangeDate = (date: string) => setDateEdited(date);
+
+    const handleRemoveTask = () => store.dispatch(remove({ id }));
+    const handleUpdateIsImportant = () => store.dispatch(updateIsImportant({ id }));
 
     const handleUpdate = () => {
         setIsEditing(false);
@@ -49,16 +45,19 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
         >
             {isEditing ? (
                 <div className="flex flex-col gap-2">
-                    <input
-                        type="name"
+                    <Input
+                        type="text"
+                        name="Nazwa"
                         value={nameEdited}
-                        onChange={event => handleChangeName(event.target.value)}
+                        setValue={handleChangeName}
                     />
 
-                    <input
+                    <Input
                         type="date"
+                        name="Termin zadania"
+                        styles={''}
                         value={dateEdited}
-                        onChange={event => handleChangeDate(event.target.value)}
+                        setValue={handleChangeDate}
                     />
                 </div>
             ) : (
@@ -69,19 +68,11 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
             )}
 
             <div className="flex justify-center items-center gap-1">
-                {isEditing ? (
-                    <IconButton
-                        icon={faCheck}
-                        styles={'text-green-500'}
-                        handler={handleUpdate}
-                    />
-                ) : (
-                    <IconButton
-                        icon={faPencilAlt}
-                        styles={'text-yellow-400'}
-                        handler={() => setIsEditing(true)}
-                    />
-                )}
+                <IconButton
+                    icon={isEditing ? faCheck : faPencilAlt}
+                    styles={isEditing ? 'text-green-500' : 'text-yellow-300'}
+                    handler={isEditing ? handleUpdate : () => setIsEditing(true)}
+                />
 
                 <IconButton
                     icon={faTimes}
