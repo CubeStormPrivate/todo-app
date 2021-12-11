@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+
 import { RootState } from '../../store/store';
 
 import { Button } from '../inc/Button';
@@ -15,9 +16,7 @@ interface TaskType {
     isImportant: boolean
 }
 
-interface TasksProps { }
-
-export const Tasks: React.FC<TasksProps> = () => {
+export const Tasks: React.FC = () => {
     const tasks = useSelector((state: RootState) => state.tasks);
 
     const navigation = useNavigate();
@@ -28,7 +27,7 @@ export const Tasks: React.FC<TasksProps> = () => {
 
 
     return (
-        <div className="w-full max-w-xl border-2 border-gray-200">
+        <div className="w-full">
             <header className="w-full flex justify-between p-8">
                 <h1 className="text-3xl text-gray-200 font-bold">Todo Lista</h1>
 

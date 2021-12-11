@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
+
 import { create } from '../../reducers/task';
 import { store } from '../../store/store';
 
@@ -23,7 +24,6 @@ export const Create: React.FC = () => {
         const id = Date.now().toString(36) + Math.random().toString(36).substr(2);;
 
         store.dispatch(create({ id, name, date, isImportant }));
-
         navigation('/');
     }
 

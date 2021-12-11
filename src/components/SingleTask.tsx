@@ -20,7 +20,6 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
     const [nameEdited, setNameEdited] = useState(name);
     const [dateEdited, setDateEdited] = useState(date);
 
-
     const handleRemoveTask = () => {
         store.dispatch(remove({ id }));
     }
