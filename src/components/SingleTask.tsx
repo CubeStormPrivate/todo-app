@@ -41,7 +41,7 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
     return (
         <div
             onClick={handleUpdateIsImportant}
-            className={`w-full flex justify-between items-center gap-8 cursor-pointer p-3 ${isImportant && 'border-l-8 border-red-400'} glass-2`}
+            className={`w-full flex justify-between items-center gap-8 cursor-pointer p-3 ${isImportant && 'border-l-4 border-red-400'} glass-2`}
         >
             {isEditing ? (
                 <div className="flex flex-col gap-2">

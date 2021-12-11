@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router';
 
 import { create } from '../../reducers/task';
 import { store } from '../../store/store';
-import { Header } from '../Header';
 
+import { Header } from '../Header';
 import { Button } from '../inc/Button';
 import { Checkbox } from '../inc/Checkbox';
 import { Input } from '../inc/Input';

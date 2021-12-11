@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { RootState } from '../../store/store';
-import { Header } from '../Header';
 
+import { Header } from '../Header';
 import { Button } from '../inc/Button';
 import { Navigation } from '../Navigation';
 import { SingleTask } from '../SingleTask';
