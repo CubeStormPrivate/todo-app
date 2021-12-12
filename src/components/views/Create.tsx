@@ -57,7 +57,7 @@ export const Create: React.FC = () => {
             >
                 {({ errors, touched }) => (
                     <>
-                        <main className="w-full px-8 flex-1">
+                        <main className="w-full flex-1 px-3">
                             <Form className="flex flex-col gap-8">
                                 <Input
                                     type="text"
