@@ -1,12 +1,16 @@
 import * as React from 'react';
+
 import { useState } from 'react';
 
+import { faTimes, faPencilAlt, faCheck, faExclamation } from '@fortawesome/free-solid-svg-icons';
 import { remove, updateIsImportant, update } from '../reducers/task';
 import { store } from '../store/store';
+import { TaskSchema } from '../validation/TaskSchema';
 
+import { Form, Formik } from 'formik';
 import { IconButton } from './inc/IconButton';
-import { faTimes, faPencilAlt, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { Input } from './inc/Input';
+import { FormSubmitButton } from './inc/FormSubmitButton';
 
 
 interface SingleTaskProps {
@@ -18,68 +22,91 @@ interface SingleTaskProps {
 
 export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImportant }) => {
     const [isEditing, setIsEditing] = useState(false);
-    const [nameEdited, setNameEdited] = useState(name);
-    const [dateEdited, setDateEdited] = useState(date);
-
-    const handleChangeName = (name: string) => setNameEdited(name);
-    const handleChangeDate = (date: string) => setDateEdited(date);
 
     const handleRemoveTask = () => store.dispatch(remove({ id }));
     const handleUpdateIsImportant = () => store.dispatch(updateIsImportant({ id }));
 
-    const handleUpdate = () => {
+    const handleSubmit = ({ name, date }) => {
         setIsEditing(false);
-
-        store.dispatch(update({
-            id,
-            name: nameEdited,
-            date: dateEdited
-        }));
+        store.dispatch(update({ id, name, date }));
     }
 
 
     return (
         <div
-            onClick={handleUpdateIsImportant}
-            className={`w-full flex justify-between items-center gap-8 cursor-pointer p-3 ${isImportant && 'border-l-4 border-red-400'} glass-2`}
+            className={`w-full flex justify-between items-center gap-8 p-3 ${isImportant && 'border-l-4 border-red-400'} glass-2`}
         >
-            {isEditing ? (
-                <div className="flex flex-col gap-2">
-                    {/* <Input
-                        type="text"
-                        name="Nazwa"
-                        value={nameEdited}
-                        setValue={handleChangeName}
-                    />
+            <Formik
+                initialValues={{ name: name, date: date, isImportant: isImportant }}
+                validationSchema={TaskSchema}
+                onSubmit={(values, actions) => {
+                    handleSubmit(values);
+                    actions.setSubmitting(false);
+                }}
+            >
+                {({ errors, touched }) => (
+                    <>
+                        {isEditing ? (
+                            <div className="flex flex-col gap-2">
+                                <Form className="flex flex-col gap-8">
+                                    <Input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Nazwa zadania"
+                                        error={errors.name}
+                                        touched={touched.name}
+                                    />
 
-                    <Input
-                        type="date"
-                        name="Termin zadania"
-                        styles={''}
-                        value={dateEdited}
-                        setValue={handleChangeDate}
-                    /> */}
-                </div>
-            ) : (
-                <div className="flex flex-col">
-                    <span className="text-gray-200 text-lg"> {name} </span>
-                    <span className="text-gray-200 font-bold text-xs"> {dateEdited} </span>
-                </div>
-            )}
+                                    <Input
+                                        type="date"
+                                        name="date"
+                                        placeholder="Termin zadania"
+                                        error={errors.date}
+                                        touched={touched.date}
+                                    />
+                                </Form>
 
-            <div className="flex justify-center items-center gap-1">
-                <IconButton
-                    icon={isEditing ? faCheck : faPencilAlt}
-                    styles={isEditing ? 'text-green-500' : 'text-yellow-300'}
-                    handler={isEditing ? handleUpdate : () => setIsEditing(true)}
-                />
+                            </div>
+                        ) : (
+                            <div className="flex flex-col">
+                                <span className="text-gray-200 text-lg"> {name} </span>
+                                <span className="text-gray-200 font-bold text-xs"> {date} </span>
+                            </div>
+                        )}
 
-                <IconButton
-                    icon={faTimes}
-                    styles={'text-red-500'}
-                    handler={handleRemoveTask}
-                />
-            </div>
-        </div >
+                        <div className="flex justify-center items-center gap-1">
+                            {isEditing ? (
+                                <>
+                                    <IconButton
+                                        icon={faExclamation}
+                                        styles={'text-yellow-300'}
+                                        handler={handleUpdateIsImportant}
+                                    />
+
+                                    <FormSubmitButton>
+                                        <IconButton
+                                            icon={faCheck}
+                                            styles={'text-green-500'}
+                                        />
+                                    </FormSubmitButton>
+                                </>
+                            ) : (
+                                <IconButton
+                                    icon={faPencilAlt}
+                                    styles={'text-yellow-300'}
+                                    handler={() => setIsEditing(true)}
+                                />
+                            )}
+
+                            <IconButton
+                                icon={faTimes}
+                                styles={'text-red-500'}
+                                handler={handleRemoveTask}
+                            />
+                        </div>
+                    </>
+                )}
+            </Formik>
+        </div>
     );
 }

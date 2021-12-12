@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 
 
-export const NewTaskSchema = Yup.object().shape({
+export const TaskSchema = Yup.object().shape({
     name: Yup
         .string()
         .min(3, 'Nazwa jest za krótka')

@@ -13,7 +13,7 @@ interface IconButtonProps {
 export const IconButton: React.FC<IconButtonProps> = ({ icon, styles, handler }) => {
     return (
         <div
-            className={`${styles} text-lg font-bold uppercase rounded-md m-2`}
+            className={`${styles} text-lg font-bold uppercase rounded-md cursor-pointer m-2`}
             onClick={handler}
         >
             <FontAwesomeIcon

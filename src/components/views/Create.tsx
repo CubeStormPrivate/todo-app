@@ -1,12 +1,11 @@
 import * as React from 'react';
 
-
 import { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 import { create } from '../../reducers/task';
 import { store } from '../../store/store';
-import { NewTaskSchema } from '../../validation/NewTaskSchema';
+import { TaskSchema } from '../../validation/TaskSchema';
 
 import { Form, Formik } from 'formik';
 import { Header } from '../Header';
@@ -16,12 +15,6 @@ import { Input } from '../inc/Input';
 import { Navigation } from '../Navigation';
 import { FormSubmitButton } from '../inc/FormSubmitButton';
 
-
-interface MyFormValues {
-    name: string;
-    date: string,
-    isImportant: boolean
-};
 
 export const Create: React.FC = () => {
     const inputNameRef = useRef<HTMLInputElement>(null);
@@ -47,17 +40,16 @@ export const Create: React.FC = () => {
     const month = ("0" + (now.getMonth() + 1)).slice(-2);
     const date = now.getFullYear() + "-" + (month) + "-" + (day);
 
-    const initialValues: MyFormValues = { name: '', date: date, isImportant: false };
+    const initialValues = { name: '', date: date, isImportant: false };
 
 
     return (
         <div className="w-full h-full flex flex-col justify-start">
             <Header title="Dodaj zadanie" />
 
-
             <Formik
                 initialValues={initialValues}
-                validationSchema={NewTaskSchema}
+                validationSchema={TaskSchema}
                 onSubmit={(values, actions) => {
                     handleSubmit(values);
                     actions.setSubmitting(false);
@@ -100,16 +92,17 @@ export const Create: React.FC = () => {
                                 handler={() => navigation('/')}
                             />
 
-                            <FormSubmitButton
-                                title="Stwórz"
-                                bgColor="green"
-                                styles="bg-green-500 text-gray-200"
-                            />
+                            <FormSubmitButton>
+                                <Button
+                                    title="Stwórz"
+                                    bgColor="green"
+                                    styles="bg-green-500 text-gray-200"
+                                />
+                            </FormSubmitButton>
                         </Navigation>
                     </>
                 )}
             </Formik>
         </div>
-
     );
 }
