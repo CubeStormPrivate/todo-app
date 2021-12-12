@@ -10,6 +10,8 @@ import { Button } from '../inc/Button';
 import { Navigation } from '../Navigation';
 import { SingleTask } from '../SingleTask';
 
+import '../../css/scrollbar.css';
+
 
 interface TaskType {
     id: number,
@@ -32,7 +34,7 @@ export const Tasks: React.FC = () => {
         <div className="w-full h-full flex flex-col">
             <Header title="Lista zadań" />
 
-            <main className="w-full px-8 flex flex-col flex-1 gap-2 overflow-y-scroll">
+            <main className="w-full flex flex-col flex-1 gap-2 overflow-y-scroll">
                 {TasksComponent}
             </main>
 

@@ -48,11 +48,12 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
                     <>
                         {isEditing ? (
                             <div className="flex flex-col gap-2">
-                                <Form className="flex flex-col gap-8">
+                                <Form className="flex flex-col gap-4 md:gap-6 lg:gap-8">
                                     <Input
                                         type="text"
                                         name="name"
                                         placeholder="Nazwa zadania"
+                                        styles="text-sm w-44 md:w-unset"
                                         error={errors.name}
                                         touched={touched.name}
                                     />
@@ -61,6 +62,7 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
                                         type="date"
                                         name="date"
                                         placeholder="Termin zadania"
+                                        styles="text-sm w-44 md:w-unset"
                                         error={errors.date}
                                         touched={touched.date}
                                     />
@@ -69,8 +71,8 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
                             </div>
                         ) : (
                             <div className="flex flex-col">
-                                <span className="text-gray-200 text-lg"> {name} </span>
-                                <span className="text-gray-200 font-bold text-xs"> {date} </span>
+                                <span className="text-gray-200 md:text-lg"> {name} </span>
+                                <span className="text-gray-200 md:font-bold text-xs"> {date} </span>
                             </div>
                         )}
 
@@ -91,18 +93,20 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
                                     </FormSubmitButton>
                                 </>
                             ) : (
-                                <IconButton
-                                    icon={faPencilAlt}
-                                    styles={'text-yellow-300'}
-                                    handler={() => setIsEditing(true)}
-                                />
-                            )}
+                                <>
+                                    <IconButton
+                                        icon={faPencilAlt}
+                                        styles={'text-yellow-300'}
+                                        handler={() => setIsEditing(true)}
+                                    />
 
-                            <IconButton
-                                icon={faTimes}
-                                styles={'text-red-500'}
-                                handler={handleRemoveTask}
-                            />
+                                    <IconButton
+                                        icon={faTimes}
+                                        styles={'text-red-500'}
+                                        handler={handleRemoveTask}
+                                    />
+                                </>
+                            )}
                         </div>
                     </>
                 )}

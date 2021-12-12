@@ -71,6 +71,7 @@ export const Create: React.FC = () => {
                                     type="date"
                                     name="date"
                                     placeholder="Termin zadania"
+                                    styles="w-full"
                                     error={errors.date}
                                     touched={touched.date}
                                 />

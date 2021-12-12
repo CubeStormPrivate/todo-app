@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import { App } from './components/App';
 
 import './css/tailwind.css';
+import './css/global.css';
 
 
 const root = document.getElementById('root');

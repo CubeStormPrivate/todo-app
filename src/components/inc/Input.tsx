@@ -23,7 +23,7 @@ export const Input: React.FC<InputProps> = ({ type, name, placeholder = '', styl
                 type={type}
                 name={name}
                 placeholder={placeholder}
-                className={`text-gray-100 font-bold tracking-wide placeholder-opacity-50 placeholder-gray-100 bg-transparent border-0 border-b-2 border-gray-200 focus:border-gray-200 focus:ring-0 p-1 ${styles}`}
+                className={`text-gray-100 font-bold tracking-wide placeholder-opacity-70 placeholder-gray-100 bg-transparent border-0 border-b-2 border-gray-200 focus:border-gray-200 focus:ring-0 p-1 ${styles}`}
                 onFocus={event => event.target.placeholder = ''}
                 onBlur={event => event.target.placeholder = name}
             />
