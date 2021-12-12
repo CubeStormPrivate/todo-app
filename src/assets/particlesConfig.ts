@@ -62,17 +62,17 @@ export const particlesConfig: RecursivePartial<IOptions> = {
         enable: true,
         value_area: 800,
       },
-      value: 5,
+      value: 40,
     },
     opacity: {
-      value: 0.2,
+      value: 0.4,
     },
     shape: {
       type: "circle",
     },
     size: {
       random: true,
-      value: 80,
+      value: 3,
     },
   },
   detectRetina: true,
