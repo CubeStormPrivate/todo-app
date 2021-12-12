@@ -45,7 +45,7 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
         >
             {isEditing ? (
                 <div className="flex flex-col gap-2">
-                    <Input
+                    {/* <Input
                         type="text"
                         name="Nazwa"
                         value={nameEdited}
@@ -58,7 +58,7 @@ export const SingleTask: React.FC<SingleTaskProps> = ({ id, name, date, isImport
                         styles={''}
                         value={dateEdited}
                         setValue={handleChangeDate}
-                    />
+                    /> */}
                 </div>
             ) : (
                 <div className="flex flex-col">

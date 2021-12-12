@@ -18,10 +18,10 @@ export const App: React.FC = () => {
                 </Routes>
             </div>
 
-            <Particles
+            {/* <Particles
                 options={particlesConfig}
                 canvasClassName="w-full h-full absolute top-0 left-0 z-0"
-            />
+            /> */}
 
             <a
                 href="https://www.pexels.com/pl-pl/zdjecie/niesamowity-wodospad-z-bujnymi-liscmi-na-skalach-4534200/"

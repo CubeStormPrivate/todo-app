@@ -1,33 +1,40 @@
 import * as React from 'react';
 
-import { useState, useRef, useEffect } from 'react';
+
+import { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 import { create } from '../../reducers/task';
 import { store } from '../../store/store';
+import { NewTaskSchema } from '../../validation/NewTaskSchema';
 
+import { Form, Formik } from 'formik';
 import { Header } from '../Header';
 import { Button } from '../inc/Button';
 import { Checkbox } from '../inc/Checkbox';
 import { Input } from '../inc/Input';
 import { Navigation } from '../Navigation';
+import { FormSubmitButton } from '../inc/FormSubmitButton';
 
+
+interface MyFormValues {
+    name: string;
+    date: string,
+    isImportant: boolean
+};
 
 export const Create: React.FC = () => {
-    const [name, setName] = useState('');
-    const [date, setDate] = useState('');
-    const [isImportant, setIsImportant] = useState(false);
-
     const inputNameRef = useRef<HTMLInputElement>(null);
-
     const navigation = useNavigate();
 
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
+    const handleSubmit = ({ name, date, isImportant }) => {
+        store.dispatch(create({
+            id: Date.now().toString(36) + Math.random().toString(36),
+            name,
+            date,
+            isImportant
+        }));
 
-        const id = Date.now().toString(36) + Math.random().toString(36).substr(2);;
-
-        store.dispatch(create({ id, name, date, isImportant }));
         navigation('/');
     }
 
@@ -35,56 +42,74 @@ export const Create: React.FC = () => {
         inputNameRef.current && inputNameRef.current.focus();
     }, []);
 
+    const now = new Date();
+    const day = ("0" + now.getDate()).slice(-2);
+    const month = ("0" + (now.getMonth() + 1)).slice(-2);
+    const date = now.getFullYear() + "-" + (month) + "-" + (day);
+
+    const initialValues: MyFormValues = { name: '', date: date, isImportant: false };
+
 
     return (
         <div className="w-full h-full flex flex-col justify-start">
             <Header title="Dodaj zadanie" />
 
-            <main className="w-full px-8 flex-1">
-                <form
-                    className="flex flex-col gap-8"
-                    onSubmit={event => handleSubmit(event)}
-                >
-                    <Input
-                        type="text"
-                        name="Nazwa zadania"
-                        styles={''}
-                        refProp={inputNameRef}
-                        value={name}
-                        setValue={setName}
-                    />
 
-                    <Input
-                        type="date"
-                        name="Termin zadania"
-                        styles={''}
-                        value={date}
-                        setValue={setDate}
-                    />
+            <Formik
+                initialValues={initialValues}
+                validationSchema={NewTaskSchema}
+                onSubmit={(values, actions) => {
+                    handleSubmit(values);
+                    actions.setSubmitting(false);
+                }}
+            >
+                {({ errors, touched }) => (
+                    <>
+                        <main className="w-full px-8 flex-1">
+                            <Form className="flex flex-col gap-8">
+                                <Input
+                                    type="text"
+                                    name="name"
+                                    placeholder="Nazwa zadania"
+                                    error={errors.name}
+                                    touched={touched.name}
+                                />
 
-                    <Checkbox
-                        name="Priorytet"
-                        styles={''}
-                        value={String(isImportant)}
-                        setValue={setIsImportant}
-                    />
-                </form>
-            </main>
+                                <Input
+                                    type="date"
+                                    name="date"
+                                    placeholder="Termin zadania"
+                                    error={errors.date}
+                                    touched={touched.date}
+                                />
 
-            <Navigation>
-                <Button
-                    title="Wstecz"
-                    bgColor="yellow"
-                    handler={() => navigation('/')}
-                />
+                                <Checkbox
+                                    name="isImportant"
+                                    label="Priorytet"
+                                    styles={''}
+                                    error={errors.isImportant}
+                                    touched={touched.isImportant}
+                                />
+                            </Form>
+                        </main>
 
-                <Button
-                    title="Stwórz"
-                    bgColor="green"
-                    styles="bg-green-500 text-gray-200"
-                    handler={event => handleSubmit(event)}
-                />
-            </Navigation>
+                        <Navigation>
+                            <Button
+                                title="Wstecz"
+                                bgColor="yellow"
+                                handler={() => navigation('/')}
+                            />
+
+                            <FormSubmitButton
+                                title="Stwórz"
+                                bgColor="green"
+                                styles="bg-green-500 text-gray-200"
+                            />
+                        </Navigation>
+                    </>
+                )}
+            </Formik>
         </div>
+
     );
 }
